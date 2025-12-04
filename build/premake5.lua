@@ -173,6 +173,7 @@ if (downloadRaylib) then
         targetdir "../bin/%{cfg.buildcfg}"
         targetname (sanitizedName)
         objdir ("../build/build_files/obj/%{cfg.platform}/%{cfg.buildcfg}/" .. sanitizedName)
+        language "C++"
 
         filter {"system:windows", "configurations:Release", "action:gmake*"}
             kind "WindowedApp"
@@ -192,11 +193,11 @@ if (downloadRaylib) then
         vpaths 
         {
             ["Header Files/*"] = { "../include/**.h",  "../include/**.hpp", "../src/**.h", "../src/**.hpp"},
-            ["Source Files/*"] = {"../src/**.c", "src/**.cpp"},
+            ["Source Files/*"] = {"../src/**.cpp"},
             ["Windows Resource Files/*"] = {"../src/**.rc", "src/**.ico"},
         }
         
-        files {"../src/**.c", "../src/**.cpp", "../src/**.h", "../src/**.hpp", "../include/**.h", "../include/**.hpp"}
+        files {"../src/**.cpp", "../src/**.h", "../src/**.hpp", "../include/**.h", "../include/**.hpp"}
         
         filter {"system:windows", "action:vs*"}
             files {"../src/*.rc", "../src/*.ico"}
